@@ -1,0 +1,31 @@
+{
+  "name": "typescript-demo",
+  "version": "1.0.0",
+  "description": "sample typescript express server for demo-ing purposes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cali3192/typescript-express-demo.git"
+  },
+  "keywords": [
+    "typescript",
+    "express",
+    "node",
+    "demo",
+    "example"
+  ],
+  "author": "cali tabilas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cali3192/typescript-express-demo/issues"
+  },
+  "homepage": "https://github.com/cali3192/typescript-express-demo#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "ts-node": "^8.8.1",
+    "typescript": "^3.8.3"
+  }
+}
