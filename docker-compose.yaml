@@ -1,11 +1,32 @@
 version: "3"
 services:
+  server:
+    build: ./docker/dev
+    depends_on:
+      - mongo
+    volumes:
+      - ./:/app
+    working_dir: /app
+    ports:
+      - "5001:5000"
+    env_file:
+      - ./docker/env/dev
+    networks:
+      - common-network
   mongo:
     image: mongo
     container_name: mongo
     restart: always
     ports:
       - 27018:27017
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    env_file:
+      - ./docker/env/dev
+    networks:
+      - common-network
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: root
+    #   MONGO_INITDB_ROOT_PASSWORD: rootpassword
+
+networks:
+  common-network:
+    driver: bridge
