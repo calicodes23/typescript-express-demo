@@ -23,9 +23,6 @@ services:
       - ./docker/env/dev
     networks:
       - common-network
-    # environment:
-    #   MONGO_INITDB_ROOT_USERNAME: root
-    #   MONGO_INITDB_ROOT_PASSWORD: rootpassword
 
 networks:
   common-network:
