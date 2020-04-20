@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 import { mongoConfig } from "./mongoConfig";
+import User from "../models/user";
+import Message from "../models/message";
 
 const {
   username,
@@ -11,7 +13,7 @@ const {
 } = mongoConfig;
 const connectionString = `mongodb://${username}:${password}@${host}:${mongoPort}/${database}?authSource=${authenticationDatabase}`;
 
-export const connectToMongo = () => {
+export const connectToMongo = (): any => {
   try {
     console.log(`\n LOG: Mongo Connection Success to ${connectionString}`);
     return mongoose.connect(connectionString);
@@ -19,3 +21,6 @@ export const connectToMongo = () => {
     console.log("LOG: connectToMongo -> error", error);
   }
 };
+
+const models = { User, Message };
+export default models;
