@@ -1,45 +1,30 @@
 import models from "./config/connection";
 
 const createUserWithMessages = async () => {
+  console.log(`\n\n LOG: SEED inside create With User Message`);
   // creating users
   const charlie = new models.User({
     username: "charlie_kelly",
+    catchPhrase: `Dayman (ah-ah-ah)
+    Fighter of the Nightman (ah-ah-ah)`,
   });
 
   const rupaul = new models.User({
     username: "rupaul_charles",
+    catchPhrase: `Catagory is: Typescript Realness`,
   });
 
   const tom = new models.User({
     username: "tom_nook",
+    catchPhrase: "This TypeScript lesson will cost 1,000,000 bells",
   });
-
-  // creating messages with user relations
-  const charlieMessage = new models.Message({
-    text: `Dayman (ah-ah-ah)
-    Fighter of the Nightman (ah-ah-ah)`,
-    user: charlie._id,
-  });
-
-  const rupaulMessage = new models.Message({
-    text: `Shantay you stay`,
-    user: rupaul._id,
-  });
-
-  const tomMessage = new models.Message({
-    text: "if you want to move your house, it will cost 30,000 bells",
-    user: tom._id,
-  });
-
-  // saving messages
-  await charlieMessage.save();
-  await rupaulMessage.save();
-  await tomMessage.save();
 
   // saving users
+  console.log(`LOG: saving users`);
   await charlie.save();
   await rupaul.save();
   await tom.save();
+  console.log(`LOG: users saved`);
 };
 
 export default createUserWithMessages;
