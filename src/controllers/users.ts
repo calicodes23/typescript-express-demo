@@ -5,7 +5,7 @@ import { Document } from "mongoose";
 class UserController {
   public async getUsersList(req: Request, res: Response, next: NextFunction) {
     try {
-      const users = await models.User.find();
+      const users: Document[] = await models.User.find();
       res.send({
         message: "these are the users",
         users,

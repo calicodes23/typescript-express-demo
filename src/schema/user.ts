@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     unique: true,
   },
-  catchphrase: String,
+  catchPhrase: String,
 });
 
 const User = mongoose.model("user", userSchema);
