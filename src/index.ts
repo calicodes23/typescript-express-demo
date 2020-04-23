@@ -10,14 +10,11 @@ const eraseDatabaseOnSync = true;
 connectToMongo()
   .then(async () => {
     console.log(`\n
-    n CONNECTION IN SERVER LOG: setting up connection inside app`);
+    \n LOG: CONNECTION IN SERVER LOG: setting up connection inside app`);
 
     // deleting on reinitializing
     if (eraseDatabaseOnSync) {
-      await Promise.all([
-        models.User.deleteMany({}),
-        models.Message.deleteMany({}),
-      ]);
+      await Promise.all([models.User.deleteMany({})]);
       // seeding
       createUserWithMessage();
     }
@@ -27,10 +24,6 @@ connectToMongo()
     const app = express();
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
-
-    app.get("/", (req, res) => {
-      res.send(`John is super CUTE`);
-    });
 
     app.use("/", routes);
 

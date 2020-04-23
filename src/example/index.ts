@@ -1,17 +1,19 @@
 import { Request, Response, NextFunction } from "express";
 
+type ExampleInput = number | number[];
+
 class Example {
   public async runFunctions(req: Request, res: Response, next: NextFunction) {
     try {
-      const exampleArr = [1, 2, 3, 4, 5];
+      const exampleArr: ExampleInput = [1, 2, 3, 4, 5];
 
-      res.send({
-        message: "exampleArr",
-        exampleArr,
-      });
+      // res.send({
+      //   message: "exampleArr",
+      //   exampleArr,
+      // });
 
       const addFive = (input: number[]): number[] => {
-        return input.map((number: number) => number + 5);
+        return input.map((number) => number + 5);
       };
 
       const addFiveResult = addFive(exampleArr);
@@ -41,7 +43,9 @@ class Example {
       };
 
       const sampleObj: ExampleObj = {};
-      // sampleObj.hello = "hi"; // NOTES: do this in live demo - why you can add .hello and not .bye and
+      // sampleObj.hello = "hi";
+      // sampleObj.world = true;
+      // sampleObj.bye = "bye";
 
       // res.send({
       //   message: "sample obj example",
