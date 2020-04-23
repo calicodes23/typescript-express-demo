@@ -5,10 +5,10 @@ class Example {
     try {
       const exampleArr = [1, 2, 3, 4, 5];
 
-      // res.send({
-      //   message: "exampleArr",
-      //   exampleArr,
-      // });
+      res.send({
+        message: "exampleArr",
+        exampleArr,
+      });
 
       const addFive = (input: number[]): number[] => {
         return input.map((number: number) => number + 5);

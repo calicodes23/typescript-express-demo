@@ -1,22 +1,48 @@
 import express from "express";
 import bodyParser from "body-parser";
 import routes from "./routes";
+import models, { connectToMongo } from "./config/connection";
+import createUserWithMessage from "./seed";
 
-const app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+// reinitializing data with seeded data on start
+const eraseDatabaseOnSync = true;
 
-app.get("/", (req, res) => {
-  res.send(`John is super handsomeeee`);
-});
+connectToMongo()
+  .then(async () => {
+    console.log(`\n
+    n CONNECTION IN SERVER LOG: setting up connection inside app`);
 
-app.use("/", routes);
+    // deleting on reinitializing
+    if (eraseDatabaseOnSync) {
+      await Promise.all([
+        models.User.deleteMany({}),
+        models.Message.deleteMany({}),
+      ]);
+      // seeding
+      createUserWithMessage();
+    }
 
-const PORT = process.env.PORT || 5000;
+    // creating express server
+    console.log(`LOG: creating the app`);
+    const app = express();
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: true }));
 
-app.listen(PORT, () => {
-  console.log(`CHANGE listening on PORT: ${PORT}
-  `);
-});
+    app.get("/", (req, res) => {
+      res.send(`John is super CUTE`);
+    });
 
-// TODO: after setting up db connection, add a branch called "demo" for the live coding
+    app.use("/", routes);
+
+    const PORT = process.env.PORT || 5000;
+
+    // listening on port, open 5001 if running on docker
+    app.listen(PORT, () => {
+      console.log(`\n Listening on PORT: ${PORT}
+    `);
+    });
+  })
+  // Todo: define type of err
+  .catch((err: any) =>
+    console.error(`LOG: Server -> connectToMongo -> err`, err)
+  );

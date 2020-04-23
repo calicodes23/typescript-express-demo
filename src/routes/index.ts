@@ -1,10 +1,11 @@
 import { Router } from "express";
 import Example from "../example";
-import Items from "../controllers/";
+import UsersController from "../controllers/users";
 
 const routes = Router();
 
 routes.get("/example", Example.runFunctions);
-routes.get("/items", Items.getItemsList);
+routes.get("/users", UsersController.getUsersList);
+routes.post("/createUser", UsersController.createUser);
 
 export default routes;
